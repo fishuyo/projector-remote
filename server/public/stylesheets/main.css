@@ -1,0 +1,49 @@
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+  
+}
+
+.btn, .btn-large, .btn-flat {
+  font-size: 0.75rem;
+  // height: inherit;
+  // line-height: inherit;
+  // border: solid 1px;
+  border-radius: 2px; 
+  padding: 0 1rem;
+  margin: 0.1rem 0.1rem;
+  // text-transform: none;
+}
+
+.row {
+  margin-bottom: 0px;
+}
+
+.info {
+  font-size: 0.7rem;
+  margin: 0 0;
+}
+
+.no-margin {
+  margin: 0 0;
+}
+
+.no-padding {
+  padding: 0 0;
+}
+
+// header, main, footer {
+  // padding-left: 300px;
+// }
+
+// @media only screen and (max-width : 992px) {
+//   header, main, footer {
+//     padding-left: 0;
+//   }
+// }
