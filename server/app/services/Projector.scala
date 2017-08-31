@@ -105,6 +105,7 @@ class PD extends Projector {
     case Mute => writeString(":PMUT1\r\n")
     case Unmute => writeString(":PMUT0\r\n")
     case GetPowerState => writeString(":POST?\r\n")
+    case Command(cmd) => writeString(cmd)
     case _ => //error("unimplemented")
   }
 
@@ -157,6 +158,8 @@ class Christie extends Projector {
 
     case SurroundMode => writeString("(WRP+SLCT 0)(EBL+SLCT 0)(SIN 21)")
     case DesktopMode => writeString("(WRP+SLCT 2)(EBL+SLCT 2)(SIN 11)")
+
+    case Command(cmd) => writeString(cmd)
 
     case _ => //error("unimplemented")
   }

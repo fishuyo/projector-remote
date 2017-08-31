@@ -8,15 +8,10 @@ import com.thoughtworks.binding.dom
 
 import ProjectorCommand._
 
-import org.scalajs.jquery.JQueryStatic
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSImport
-import com.definitelyscala.materializecss.JQuery
+import scala.scalajs.js.annotation._
 
-// @js.native
-// @JSImport("jquery", JSImport.Namespace)
-// object jquery extends JQueryStatic //with JQuery
-
+@JSExport
 object Projectors {
 
   val projectors = Vars.empty[(String, Seq[(ProjectorInfo, Var[ProjectorResponse])])]
@@ -37,10 +32,15 @@ object Projectors {
     }
   }
 
-  // def collapsible() = {
-  //   jquery(".collapsible").asInstanceOf[JQuery].collapsible()
-  // }
+  @JSExport
+  def runGroup(group:String, cmd:String) = {
+    Socket.send(RunGroup(group,Command(cmd)))
+  }
 
+  @JSExport
+  def run(id:Int, cmd:String) = {
+    Socket.send(Run(id,Command(cmd)))
+  }
 
   object views {
    
