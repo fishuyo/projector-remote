@@ -16,6 +16,7 @@ val scalaV = "2.11.11"
 
 lazy val server = (project in file("server")).settings(
   scalaVersion := scalaV,
+  PlayKeys.devSettings += ("play.http.router", "projector.Routes"),
   scalaJSProjects := Seq(client),
   pipelineStages in Assets := Seq(scalaJSPipeline),
   pipelineStages := Seq(digest, gzip),
@@ -71,7 +72,7 @@ lazy val sharedJvm = shared.jvm
 lazy val sharedJs = shared.js
 
 // loads the server project at sbt startup
-onLoad in Global := (Command.process("project server", _: State)) compose (onLoad in Global).value
+// onLoad in Global := (Command.process("project server", _: State)) compose (onLoad in Global).value
 
 
 

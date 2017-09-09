@@ -10,6 +10,7 @@ import ProjectorCommand._
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation._
+import scala.scalajs.js.timers.setInterval
 
 @JSExport
 object Projectors {
@@ -165,6 +166,10 @@ object Projectors {
             <span class="badge new green" data:data-badge-caption={status.getClass.getSimpleName}></span>
           case ProjectorStatus.Off => 
             <span class="badge new blue" data:data-badge-caption={status.getClass.getSimpleName}></span>
+          case ProjectorStatus.DeepSleep => 
+            <span class="badge new blue" data:data-badge-caption={status.getClass.getSimpleName}></span>
+          case ProjectorStatus.CriticalOff => 
+            <span class="badge new red" data:data-badge-caption={status.getClass.getSimpleName}></span>
           case _ => 
             <span class="badge new grey" data:data-badge-caption={status.getClass.getSimpleName}></span>
         }

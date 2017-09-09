@@ -23,6 +23,7 @@ object Main extends js.JSApp {
 
     Socket.init()
     setInterval(1000){ Socket.send("keepalive") }
+    // setInterval(15000){ Socket.send(RunAll(ProjectorCommand.GetPowerState)) }
 
   }
   

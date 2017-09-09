@@ -13,10 +13,10 @@
     <title>@title</title>
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="@routes.Assets.versioned("lib/materializecss/css/materialize.css")"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="/assets/lib/materializecss/css/materialize.css"  media="screen,projection"/>
 
-    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
-    <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+    <link rel="stylesheet" media="screen" href="@controllers.projector.routes.Assets.versioned("stylesheets/main.css")">
+    <link rel="shortcut icon" type="image/png" href="@controllers.projector.routes.Assets.versioned("images/favicon.png")">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
@@ -26,10 +26,13 @@
   
       @content
 
-    @scalajs.html.scripts("client", routes.Assets.versioned(_).toString, name => getClass.getResource(s"/public/$name") 
-    != null)
+    @scalajs.html.scripts(
+      "client",
+      controllers.projector.routes.Assets.versioned(_).toString,
+      name => (getClass.getResource(s"/public/$name") != null || getClass.getResource(s"/public/lib/server/$name") != null)
+    )
 
-    <script src="@routes.Assets.versioned("javascripts/main.js")" type="text/javascript"></script>
+    <script src="@controllers.projector.routes.Assets.versioned("javascripts/main.js")" type="text/javascript"></script>
 
   </body>
 </html>

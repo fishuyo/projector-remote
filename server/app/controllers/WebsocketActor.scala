@@ -1,4 +1,4 @@
-package controllers
+package controllers.projector
 
 import projector._
 import projector.Protocol._

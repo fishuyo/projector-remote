@@ -32,6 +32,8 @@ object Socket {
     
     ws.onopen = { (event: Event) =>
       ws.send("handshake")
+      send(RunAll(ProjectorCommand.GetPowerState))
+
       event
     }
 
@@ -44,7 +46,7 @@ object Socket {
       msg match {
         case ProjectorList(ps) => Projectors.update(ps)
         case res:ProjectorResponse => Projectors.update(res)
-        
+        case _ => ()
       }
     }
 
@@ -55,6 +57,7 @@ object Socket {
 
   def getWebsocketUri(): String = {
     val wsProtocol = if (document.location.protocol == "https:") "wss" else "ws"
-    s"$wsProtocol://${document.location.host}/ws"
+    val path = if(document.location.pathname == "/") "/ws" else document.location.pathname+"/ws"
+    s"$wsProtocol://${document.location.host}${path}"
   }
 }
