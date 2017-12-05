@@ -19,8 +19,8 @@ object Projectors {
 
   def apply() = projectors
 
-  def update(gs:Map[String,Seq[ProjectorInfo]])  = {
-    gs.foreach { case (group, ps) => 
+  def update(p:ProjectorList) = {
+    p.groups.foreach { case ProjectorGroup(group, ps) => 
       val res = ps.map( p => Var(ProjectorResponse(p.id, ProjectorStatus.Disconnected, "")))
       projectors.value += ((group, ps.zip(res)))
     }

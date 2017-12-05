@@ -44,7 +44,7 @@ object Socket {
       val msg = Json.parse(event.data.toString).as[Protocol]
 
       msg match {
-        case ProjectorList(ps) => Projectors.update(ps)
+        case p:ProjectorList => Projectors.update(p)
         case res:ProjectorResponse => Projectors.update(res)
         case _ => ()
       }

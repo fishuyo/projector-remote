@@ -28,7 +28,7 @@ class WebsocketActor(out: ActorRef) extends Actor {
       val proto = Json.parse(msg).as[Protocol]
       proto match {
         case Run(id, cmd) => actors(id) ! cmd
-        case RunGroup(group, cmd) => Projectors.projectors(group).map(_.id).foreach( actors(_) ! cmd)
+        case RunGroup(group, cmd) => Projectors.groups(group).map(_.id).foreach( actors(_) ! cmd)
         case RunAll(cmd) => actors.foreach( _ ! cmd)
       }
 
@@ -38,17 +38,18 @@ class WebsocketActor(out: ActorRef) extends Actor {
   }
 
   def sendProjectorList() = {
-    val projectors = Projectors.projectors
-    val map = projectors.map { 
+    val groups = Projectors.groups.map { 
       case (g,ps) => 
         val pis = ps.map { 
           case p:PD => ProjectorInfo(p.id, p.name, Seq(On, Off, Mute, Unmute))
           case p:Christie => ProjectorInfo(p.id, p.name, Seq(On, Off, Mute, Unmute, SurroundMode, DesktopMode))
           case p:TestProjector => ProjectorInfo(p.id, p.name, Seq(On, Off, Mute, Unmute))
         }
-        (g,pis)
+        ProjectorGroup(g,pis)
     }
-    out ! Json.toJson(ProjectorList(map)).toString
+    val json = Json.toJson(ProjectorList(groups.toList)).toString
+    // println(json)
+    out ! json
   }
 
 }
